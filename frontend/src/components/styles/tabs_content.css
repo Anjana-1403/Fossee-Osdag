@@ -1,0 +1,143 @@
+/* Enhanced index_page.css */
+
+/* Container Styles */
+.connection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    padding: 20px;
+  }
+  
+  /* Connection Option Card */
+  .connection-option {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .connection-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .connection-option h3 {
+    font-size: 18px;
+    margin: 0;
+    padding: 16px;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 600;
+  }
+  
+  /* Image Container */
+  .connection-image-container {
+    position: relative;
+    min-height: 180px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex: 1;
+  }
+  
+  .connection-image-container.selected {
+    background-color: rgba(66, 135, 245, 0.08);
+    border: 2px solid #4287f5;
+    border-radius: 8px;
+  }
+  
+  /* Image Styling */
+  .connection-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    transition: opacity 0.2s ease;
+  }
+  
+  .connection-option:hover .connection-image {
+    opacity: 0.9;
+  }
+  
+  /* Radio Button Styling */
+  .connection-radio {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 2;
+  }
+  
+  /* When no image is available */
+  .no-image {
+    width: 100%;
+    height: 100%;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    color: #999;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  
+  /* Loading State */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    gap: 16px;
+  }
+  
+  .loading-container p {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  /* Error State */
+  .error-container {
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Empty State */
+  .empty-content {
+    padding: 32px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    margin: 24px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .connection-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    
+    .connection-option h3 {
+      font-size: 16px;
+      padding: 12px;
+    }
+    
+    .connection-image-container {
+      min-height: 140px;
+      padding: 16px;
+    }
+  }
