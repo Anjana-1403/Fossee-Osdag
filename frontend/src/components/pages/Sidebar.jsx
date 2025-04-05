@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Button } from 'primereact/button';
 import { InputSwitch } from 'primereact/inputswitch';
 import { Divider } from 'primereact/divider';
-import { useTheme } from './Theme'; // Import the custom hook
+import { useTheme } from './Theme';
+import { useNavigate } from 'react-router-dom';
 import '../styles/index_page.css';
 
-const Sidebar = ({ activeLeftPanel, handleLeftMenuClick }) => {
+const Sidebar = ({ activeLeftPanel, setActiveLeftPanel }) => {
     const [leftMenuItems, setLeftMenuItems] = useState([]);
-    const { darkMode, setDarkMode } = useTheme(); // Use the theme context
+    const { darkMode, setDarkMode } = useTheme();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -22,6 +24,11 @@ const Sidebar = ({ activeLeftPanel, handleLeftMenuClick }) => {
 
         fetchMenuItems();
     }, []);
+
+    const handleLeftMenuClick = (item) => {
+        setActiveLeftPanel(item.name); // Update the active left panel state
+        navigate(`/${item.name}`); // Navigate to the selected sidebarname
+    };
 
     return (
         <div className="left-sidebar">

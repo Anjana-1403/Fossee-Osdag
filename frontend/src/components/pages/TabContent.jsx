@@ -1,64 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { RadioButton } from 'primereact/radiobutton';
-import { ProgressSpinner } from 'primereact/progressspinner';
-import { Message } from 'primereact/message';
 import '../styles/tabs_content.css';
 
-const TabContent = ({ connectionId, onSelectionChange, selectedConnectionType, navigate }) => {
+const TabContent = ({ connectionName }) => {
     const [tabContent, setTabContent] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [selectedConnectionType, setSelectedConnectionType] = useState(null);
 
     useEffect(() => {
-        const fetchTabContent = async () => {
-            setLoading(true);
-            setError(null);
+        const fetchContent = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/tab-content/${connectionId}/`);
-                console.log("Received tab content:", response.data);
+                const response = await axios.get(`http://localhost:8000/api/tab-content/${connectionName}/`);
+                console.log('Tab Content API Response:', response.data);
                 setTabContent(response.data);
             } catch (error) {
                 console.error('Error fetching tab content:', error);
-                setError('Failed to load connection types. Please try again later.');
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchTabContent();
-    }, [connectionId]);
+        fetchContent();
+    }, [connectionName]);
 
     const handleSelectionChange = (value, name) => {
-        if (onSelectionChange) {
-            onSelectionChange(value);
-        }
-        navigate(`/${name}`); 
+        setSelectedConnectionType(value);
+        console.log(`Selected Connection Type: ${name}`);
     };
 
     if (loading) {
-        return (
-            <div className="loading-container">
-                <ProgressSpinner />
-                <p>Loading connection types...</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="error-container">
-                <Message severity="error" text={error} />
-            </div>
-        );
+        return <p>Loading...</p>;
     }
 
     if (tabContent.length === 0) {
-        return (
-            <div className="empty-content">
-                <Message severity="info" text="No connection types available for this category." />
-            </div>
-        );
+        return <p>No content available for this tab.</p>;
     }
 
     return (

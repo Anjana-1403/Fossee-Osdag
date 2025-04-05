@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import TabContent from './TabContent'; 
+import TabContent from './TabContent';
 import '../styles/tabs.css';
 
 const Tabs = () => {
     const [tabs, setTabs] = useState([]);
-    const [activeTab, setActiveTab] = useState(null); 
+    const { sidebarname, tabname } = useParams(); // Get sidebarname and tabname from the URL
+    const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState(tabname || null); // Initialize with tabname from URL
 
     useEffect(() => {
         const fetchTabs = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/tabs/');
-                setTabs(response.data); 
-                if (response.data.length > 0) {
-                    setActiveTab(response.data[0].id); 
+                console.log('Tabs API Response:', response.data); // Log the response
+                setTabs(response.data);
+
+                // If no tabname is in the URL, default to the first tab
+                if (response.data.length > 0 && !tabname) {
+                    const defaultTab = response.data[0].name;
+                    setActiveTab(defaultTab);
+                    navigate(`/${sidebarname}/${defaultTab}`); // Update the URL with the default tab
                 }
             } catch (error) {
                 console.error('Error fetching tabs:', error);
@@ -21,7 +29,19 @@ const Tabs = () => {
         };
 
         fetchTabs();
-    }, []);
+    }, [sidebarname, tabname, navigate]);
+
+    useEffect(() => {
+        // Update activeTab whenever tabname changes in the URL
+        if (tabname) {
+            setActiveTab(tabname);
+        }
+    }, [tabname]);
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab.name); 
+        navigate(`/${sidebarname}/${tab.name}`); 
+    };
 
     return (
         <div>
@@ -29,15 +49,15 @@ const Tabs = () => {
                 {tabs.map((tab) => (
                     <li
                         key={tab.id}
-                        className={`tab-item ${activeTab === tab.id ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab.id)}
+                        className={`tab-item ${activeTab === tab.name ? 'active' : ''}`}
+                        onClick={() => handleTabClick(tab)} // Pass the tab object
                     >
                         {tab.name}
                     </li>
                 ))}
             </ul>
             <div className="tab-content">
-                {activeTab && <TabContent connectionId={activeTab} />}
+                {activeTab && <TabContent connectionName={activeTab} />}
             </div>
         </div>
     );

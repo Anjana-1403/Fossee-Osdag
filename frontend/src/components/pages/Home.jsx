@@ -6,34 +6,36 @@ import { useTheme } from './Theme';
 import '../styles/index_page.css';
 
 const Home = () => {
-    const { tabName } = useParams();
+    const { sidebarname, tabname } = useParams(); // Get both sidebarname and tabname from the URL
     const navigate = useNavigate();
     const { darkMode } = useTheme();
-    const [activeLeftPanel, setActiveLeftPanel] = useState(tabName || 'Welcome');
+    const [activeLeftPanel, setActiveLeftPanel] = useState(sidebarname || 'Welcome'); // Initialize with sidebarname or default to 'Welcome'
 
     const handleLeftMenuClick = (item) => {
-        navigate(`/${item.name}`);
-        setActiveLeftPanel(item.name);
+        setActiveLeftPanel(item.name); // Update the active left panel state
+        navigate(`/${item.name}`); // Navigate to the selected sidebarname
     };
 
     useEffect(() => {
-        if (tabName) {
-            setActiveLeftPanel(tabName);
+        // Sync the activeLeftPanel with the sidebarname from the URL
+        if (sidebarname) {
+            setActiveLeftPanel(sidebarname);
         }
-    }, [tabName]);
+    }, [sidebarname]);
 
     return (
         <div className={`app-container ${darkMode ? 'dark-theme' : ''}`}>
             <div className="main-layout">
+                {/* Sidebar Component */}
                 <Sidebar
-                    activeLeftPanel={activeLeftPanel}
-                    setActiveLeftPanel={setActiveLeftPanel}
-                    handleLeftMenuClick={handleLeftMenuClick}
+                    activeLeftPanel={activeLeftPanel} // Pass the active left panel state
+                    setActiveLeftPanel={setActiveLeftPanel} // Allow Sidebar to update the state
                 />
 
+                {/* Main Content Area */}
                 <div className="main-content">
                     {activeLeftPanel === 'Connection' ? (
-                        <Tabs />
+                        <Tabs /> // Render Tabs if 'Connection' is active
                     ) : activeLeftPanel === 'Welcome' ? (
                         <div className="welcome-message">
                             <h1>Welcome to Osdag</h1>

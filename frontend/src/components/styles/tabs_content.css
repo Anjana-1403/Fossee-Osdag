@@ -141,3 +141,61 @@
       padding: 16px;
     }
   }
+
+/* Dark Mode Styles */
+.connection-grid.dark-mode {
+  background-color: #1e1e1e; /* Dark background for the grid */
+  color: #e0e0e0; /* Light text color */
+}
+
+.connection-option {
+  background-color: #ffffff; /* Default light mode background */
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.connection-grid.dark-mode .connection-option {
+  background-color: #2a2a2a; /* Dark mode card background */
+  border-color: #444; /* Dark mode border color */
+  color: #e0e0e0; /* Light text color */
+}
+
+.connection-option h3 {
+  color: #333; /* Default light mode text color */
+}
+
+.connection-grid.dark-mode .connection-option h3 {
+  color: #e0e0e0; /* Light text color for dark mode */
+}
+
+.connection-image-container {
+  background-color: #f5f5f5; /* Default light mode background */
+}
+
+.connection-grid.dark-mode .connection-image-container {
+  background-color: #3a3a3a; /* Dark mode background for image container */
+}
+
+.no-image {
+  background-color: #f5f5f5; /* Default light mode background */
+  color: #999;
+}
+
+.connection-grid.dark-mode .no-image {
+  background-color: #3a3a3a; /* Dark mode background for no-image container */
+  color: #bbb; /* Light text color for dark mode */
+}
+
+.connection-radio {
+  background-color: transparent; /* Ensure radio button blends with theme */
+}
+
+/* Adjust hover effects for dark mode */
+.connection-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); /* Default light mode shadow */
+}
+
+.connection-grid.dark-mode .connection-option:hover {
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1); /* Subtle light shadow for dark mode */
+}
