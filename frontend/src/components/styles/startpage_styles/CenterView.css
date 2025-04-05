@@ -1,0 +1,96 @@
+.center-view {
+    width: 50%; /* Adjusted width for alignment */
+    display: flex;
+    flex-direction: column;
+    padding: 10px; /* Added padding for spacing */
+}
+
+.view-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    padding: 4px;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 8px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-input {
+    margin-right: 4px;
+}
+
+.checkbox-label {
+    font-size: 14px;
+}
+
+.axis-controls {
+    display: flex;
+    align-items: center;
+}
+
+.axis-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 8px;
+}
+
+.axis-label {
+    font-size: 12px;
+}
+
+.axis-label.x {
+    color: #ff0000;
+}
+
+.axis-label.y {
+    color: #00aa00;
+}
+
+.axis-label.z {
+    color: #0000ff;
+}
+
+.axis-box {
+    width: 16px;
+    height: 16px;
+}
+
+.axis-box.x {
+    background-color: #ff0000;
+}
+
+.axis-box.y {
+    background-color: #00aa00;
+}
+
+.axis-box.z {
+    background-color: #0000ff;
+}
+
+.view-area {
+    flex: 1;
+    background-color: #000;
+    position: relative;
+}
+
+.coordinate-system {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+.bottom-panel {
+    height: 25%;
+    background-color: white;
+    border-top: 1px solid #ccc;
+}

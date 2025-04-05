@@ -1,0 +1,58 @@
+.input-dock {
+    width: 25%; /* Adjusted width for alignment */
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    padding: 10px; /* Added padding for spacing */
+}
+
+.dock-content {
+    flex: 1;
+    padding: 8px;
+    overflow: auto;
+}
+
+.input-section {
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.form-select, .form-input {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.action-button {
+    background-color: #1a365d;
+    color: white;
+    padding: 4px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background-color: #2a4a7d;
+}

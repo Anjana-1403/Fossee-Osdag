@@ -1,0 +1,27 @@
+.dock-header {
+    background-color: #d3d3d3;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dock-title {
+    font-size: 14px;
+  }
+  
+  .dock-controls {
+    display: flex;
+  }
+  
+  .dock-control-button {
+    font-size: 12px;
+    margin: 0 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dock-control-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }

@@ -1,0 +1,16 @@
+.menu-bar {
+    display: flex;
+    background-color: #d3d3d3;
+    color: #333;
+    font-size: 14px;
+    padding: 4px;
+  }
+  
+  .menu-item {
+    margin-right: 16px;
+    cursor: pointer;
+  }
+  
+  .menu-item:hover {
+    text-decoration: underline;
+  }

@@ -57,7 +57,7 @@
 
 .content-image {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 300px;
   object-fit: contain;
   border-radius: 6px;
 }
@@ -66,10 +66,18 @@
 .tabs-content-container .p-tabview .p-tabview-nav {
   background-color: transparent;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .tabs-content-container.dark-mode .p-tabview .p-tabview-nav {
   border-bottom: 1px solid #444;
+}
+
+.tabs-content-container .p-tabview .p-tabview-nav li {
+  margin: 0;
 }
 
 .tabs-content-container .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -78,6 +86,8 @@
   border: 1px solid #ddd;
   margin-right: 4px;
   border-radius: 4px 4px 0 0;
+  text-align: center;
+  padding: 8px 12px;
 }
 
 .tabs-content-container.dark-mode .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -101,3 +111,62 @@
 .tabs-content-container .p-tabview-panels {
   padding: 20px 0;
 }
+
+/* Style for the start button */
+.start-button {
+  background-color: #4287f5;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #306ac9;
+}
+
+.start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Adjust layout to remove flex between title and image */
+.image-selection-container {
+  display: block;
+  text-align: center;
+}
+
+.image-selection-container .content-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.image-selection-container .image-wrapper {
+  margin: 0 auto;
+}
+
+.content-image {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.toggle-button {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #4287f5;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button.active {
+  background-color: #4287f5;
+}
+
