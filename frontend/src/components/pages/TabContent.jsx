@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { RadioButton } from 'primereact/radiobutton';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { useTheme } from './Theme';
 import '../styles/tabs_content.css';
 
 const TabContent = ({ connectionName }) => {
     const [tabContent, setTabContent] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedConnectionType, setSelectedConnectionType] = useState(null);
+    const { darkMode } = useTheme();
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -24,11 +25,6 @@ const TabContent = ({ connectionName }) => {
         fetchContent();
     }, [connectionName]);
 
-    const handleSelectionChange = (value, name) => {
-        setSelectedConnectionType(value);
-        console.log(`Selected Connection Type: ${name}`);
-    };
-
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -38,34 +34,32 @@ const TabContent = ({ connectionName }) => {
     }
 
     return (
-        <div className="connection-grid">
-            {tabContent.map((content) => (
-                <div key={content.id} className="connection-option">
-                    <h3>{content.title}</h3>
-                    <div className={`connection-image-container ${selectedConnectionType === content.id ? 'selected' : ''}`}>
-                        {content.image ? (
-                            <img
-                                src={content.image}
-                                alt={content.title}
-                                className="connection-image"
-                                onError={(e) => {
-                                    console.error(`Failed to load image: ${content.image}`);
-                                }}
-                            />
-                        ) : (
-                            <div className="no-image">No image available</div>
-                        )}
-                        <RadioButton
-                            inputId={`connection-${content.id}`}
-                            name="connectionType"
-                            value={content.id}
-                            onChange={(e) => handleSelectionChange(e.value, content.title)} // Pass the name
-                            checked={selectedConnectionType === content.id}
-                            className="connection-radio"
-                        />
-                    </div>
-                </div>
-            ))}
+        <div className={`tabs-content-container ${darkMode ? 'dark-mode' : ''}`}>
+            <TabView>
+                {tabContent.map((content) => (
+                    <TabPanel key={content.id} header={content.title}>
+                        <div className="content-container">
+                            <div className="content-header">
+                                <h2>{content.name}</h2>
+                            </div>
+                            <div className="image-display">
+                                {content.image ? (
+                                    <img
+                                        src={content.image}
+                                        alt={content.name}
+                                        className="content-image"
+                                        onError={(e) => {
+                                            console.error(`Failed to load image: ${content.image}`);
+                                        }}
+                                    />
+                                ) : (
+                                    <div className="no-image">No image available</div>
+                                )}
+                            </div>
+                        </div>
+                    </TabPanel>
+                ))}
+            </TabView>
         </div>
     );
 };

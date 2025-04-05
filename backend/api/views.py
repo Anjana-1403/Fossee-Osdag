@@ -30,6 +30,7 @@ def get_tab_content(request, connection_name):
             item_data = {
                 "id": item.id,
                 "title": item.title,
+                "name": item.name,  # Include the name field
                 "image": image_url,
             }
             data.append(item_data)

@@ -13,9 +13,10 @@ class connection(models.Model):
         return self.name
     
 class connectionsub(models.Model):
-    type=models.ForeignKey(connection,on_delete=models.CASCADE,related_name="connection")
-    title=models.TextField(max_length=100)
-    image=models.ImageField(upload_to='images/', null=True, blank=True)
+    type = models.ForeignKey(connection, on_delete=models.CASCADE, related_name="connection")
+    title = models.TextField(max_length=100)
+    name = models.TextField(max_length=100, null=True, blank=True)  # New field for image name
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
