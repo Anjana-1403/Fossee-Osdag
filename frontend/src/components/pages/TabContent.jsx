@@ -16,10 +16,26 @@ const TabContent = ({ connectionName }) => {
             try {
                 const response = await axios.get(`http://localhost:8000/api/tab-content/${connectionName}/`);
                 console.log('Tab Content API Response:', response.data);
-                setTabContent(response.data);
+
+                // Group content by title
+                const groupedContent = response.data.reduce((acc, item) => {
+                    const existingTab = acc.find((tab) => tab.title === item.title);
+                    if (existingTab) {
+                        existingTab.items.push({ name: item.name, image: item.image });
+                    } else {
+                        acc.push({
+                            title: item.title,
+                            items: [{ name: item.name, image: item.image }],
+                        });
+                    }
+                    return acc;
+                }, []);
+
+                setTabContent(groupedContent);
+
                 // Set the first image as selected by default if available
-                if (response.data.length > 0 && response.data[0].image) {
-                    setSelectedImage(response.data[0].image);
+                if (groupedContent.length > 0 && groupedContent[0].items[0]?.image) {
+                    setSelectedImage(groupedContent[0].items[0].image);
                 }
             } catch (error) {
                 console.error('Error fetching tab content:', error);
@@ -46,33 +62,34 @@ const TabContent = ({ connectionName }) => {
     return (
         <div className={`tabs-content-container ${darkMode ? 'dark-mode' : ''}`}>
             <TabView>
-                {tabContent.map((content) => (
-                    <TabPanel key={content.id} header={content.title}>
+                {tabContent.map((tab) => (
+                    <TabPanel key={tab.title} header={tab.title}>
                         <div className="content-container">
-                           
-                            <div className="image-display">
-                                {content.image ? (
-                                    <div className="image-selection-container">
-                                        <div className="content-name">{content.name}</div>
-                                        <div className="image-wrapper">
-                                            <img
-                                                src={content.image}
-                                                alt={content.name}
-                                                className="content-image"
-                                                onError={(e) => {
-                                                    console.error(`Failed to load image: ${content.image}`);
-                                                }}
+                            {tab.items.map((item, index) => (
+                                <div key={index} className="image-display">
+                                    {item.image ? (
+                                        <div className="image-selection-container">
+                                            <div className="content-name">{item.name}</div>
+                                            <div className="image-wrapper">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="content-image"
+                                                    onError={(e) => {
+                                                        console.error(`Failed to load image: ${item.image}`);
+                                                    }}
+                                                />
+                                            </div>
+                                            <button
+                                                className={`toggle-button ${selectedImage === item.image ? 'active' : ''}`}
+                                                onClick={() => handleToggle(item.image)}
                                             />
                                         </div>
-                                        <button
-                                            className={`toggle-button ${selectedImage === content.image ? 'active' : ''}`}
-                                            onClick={() => handleToggle(content.image)}
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className="no-image">No image available</div>
-                                )}
-                            </div>
+                                    ) : (
+                                        <div className="no-image">No image available</div>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </TabPanel>
                 ))}

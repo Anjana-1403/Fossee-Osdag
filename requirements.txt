@@ -1,0 +1,9 @@
+# Backend requirements
+Django>=5.1,<6.0
+djangorestframework>=3.14,<4.0
+django-cors-headers>=3.14,<4.0
+Pillow>=10.0,<11.0
+
+# Frontend requirements
+node>=16.0.0
+npm>=7.0.0
